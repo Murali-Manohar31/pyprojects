@@ -56,3 +56,7 @@ def upload_image():
 root=tk.Tk()
 root.title("Handwritten Calculator")
 root.geometry("500x600")
+
+#Upload button
+btn =tk.Button(root, text="Upload image",command=upload_image, font=("Arial",14))
+btn.pack(pady=10)
