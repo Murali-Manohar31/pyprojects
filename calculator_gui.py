@@ -5,15 +5,18 @@ import easyocr #Reads the text from file
 import cv2 #image processing 
 from sympy import sympify #solves math
 
+#GUI Window
 root=tk.Tk()
-root.title("Calculator")
+root.title("Handwritten Calculator")
+root.geometry("500x600")
+
 
 panel=tk.Label(root)
 panel.pack()
 output_text=tk.Text(root,height=15,width=50)
 output_text.pack()
 #initialize ocr
-reader= easyocr.Reader(['en'],gpu='false')
+reader= easyocr.Reader(['en'],gpu=False)
 
 #extracts texts from image
 def extract_image(image_path):
@@ -52,11 +55,10 @@ def upload_image():
             result = solve_expression(line)
             output_text.insert(tk.END,f"{line}={result}\n")#calculates each line and shows result
             
-#GUI Window
-root=tk.Tk()
-root.title("Handwritten Calculator")
-root.geometry("500x600")
 
 #Upload button
 btn =tk.Button(root, text="Upload image",command=upload_image, font=("Arial",14))
 btn.pack(pady=10)
+
+
+root.mainloop()
