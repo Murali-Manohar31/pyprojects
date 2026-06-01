@@ -20,3 +20,7 @@ while True:
 #YOLO Detection
 results=model(frame)
 annotated_frame = results[0].plot()
+
+current_time=time.time()
+fps=1/(current_time-prev_time)
+prev_time=current_time
