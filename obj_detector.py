@@ -1,4 +1,5 @@
 from ultralytics import YOLO
+from collections import defaultdict
 import cv2
 import time
 
@@ -13,10 +14,18 @@ if not cap.isOpened():
 prev_time=0
 while True:
     ret,frame=cap.read()
+    results= model(frame)
+    object_counts=defaultdict(int)
+    for result in results:
+        boxes=result.boxes
+        
+        for box in boxes:
+            cls = int(box.cls[0])
+            class_name=model.names[cls]
+            object_counts[class_name] +=1
+    cv2.imshow("Object Detector",frame)
     
-    if not ret:
-        print("failed to grab frame")
-        break
+
 #YOLO Detection
     results=model(frame)
     annotated_frame = results[0].plot()
